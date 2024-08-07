@@ -1,5 +1,6 @@
 import 'package:capitals/data/questions.dart';
-import 'package:capitals/widgets/answer_button.dart';
+import 'package:capitals/widgets/questions_view.dart';
+import 'package:capitals/widgets/result_view.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,12 +14,24 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<String> answers = [];
   var currentQuestionIndex = 0;
+  String activeScreen = 'home-page';
 
   void chooseAnswer(String answer) {
-    answers.add(answer);
-    setState(() {
-      currentQuestionIndex++;
-    });
+    // if it is a valid range update and set the state
+    if (currentQuestionIndex < questionnaire.length - 1) {
+      setState(() {
+        currentQuestionIndex++;
+      });
+    } else {
+      setState(() {
+        activeScreen = 'final-screen';
+      });
+    }
+
+    // add answers only if it is not present
+    if (!answers.contains(answer)) {
+      answers.add(answer);
+    }
   }
 
   @override
@@ -39,34 +52,11 @@ class _HomePageState extends State<HomePage> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                currentQuestion.question,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              ...currentQuestion.getShuffledAnswers().map((answer) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 64.0, vertical: 4.0),
-                  child: AnswerButton(
-                      onTap: () {
-                        chooseAnswer(answer);
-                      },
-                      answerText: answer),
-                );
-              }),
-            ],
-          ),
+          child: activeScreen == 'final-screen'
+              ? const ResultView()
+              : QuestionsView(
+                  questionObj: currentQuestion,
+                  onAnswerButtonTap: chooseAnswer),
         ),
       ),
     );
