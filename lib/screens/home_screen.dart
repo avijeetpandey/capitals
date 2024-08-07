@@ -16,7 +16,13 @@ class _HomePageState extends State<HomePage> {
   var currentQuestionIndex = 0;
   String activeScreen = 'home-page';
 
-  void chooseAnswer(String answer) {
+  @override
+  void initState() {
+    activeScreen = 'home-page';
+    super.initState();
+  }
+
+  void chooseAnswer(String answer, BuildContext context) {
     // if it is a valid range update and set the state
     if (currentQuestionIndex < questionnaire.length - 1) {
       setState(() {
@@ -25,6 +31,13 @@ class _HomePageState extends State<HomePage> {
     } else {
       setState(() {
         activeScreen = 'final-screen';
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                ResultView(currentScreen: activeScreen, score: "score"),
+          ),
+        );
       });
     }
 
@@ -52,11 +65,8 @@ class _HomePageState extends State<HomePage> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: activeScreen == 'final-screen'
-              ? const ResultView()
-              : QuestionsView(
-                  questionObj: currentQuestion,
-                  onAnswerButtonTap: chooseAnswer),
+          child: QuestionsView(
+              questionObj: currentQuestion, onAnswerButtonTap: chooseAnswer),
         ),
       ),
     );

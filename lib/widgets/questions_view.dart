@@ -6,7 +6,7 @@ class QuestionsView extends StatefulWidget {
   QuestionsView(
       {super.key, required this.questionObj, required this.onAnswerButtonTap});
   final QuizQuestion questionObj;
-  final Function(String answer) onAnswerButtonTap;
+  final Function(String answer, BuildContext context) onAnswerButtonTap;
 
   @override
   State<QuestionsView> createState() => _QuestionsViewState();
@@ -34,7 +34,7 @@ class _QuestionsViewState extends State<QuestionsView> {
                 const EdgeInsets.symmetric(horizontal: 48.0, vertical: 4.0),
             child: AnswerButton(
                 onTap: () {
-                  widget.onAnswerButtonTap(answer);
+                  widget.onAnswerButtonTap(answer, context);
                 },
                 answerText: answer),
           );
