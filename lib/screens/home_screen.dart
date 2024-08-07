@@ -1,3 +1,5 @@
+import 'package:capitals/data/questions.dart';
+import 'package:capitals/widgets/answer_button.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,39 +11,63 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
+  List<String> answers = [];
+  var currentQuestionIndex = 0;
 
-  void _incrementCounter() {
+  void chooseAnswer(String answer) {
+    answers.add(answer);
     setState(() {
-      _counter++;
+      currentQuestionIndex++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final currentQuestion = questionnaire[currentQuestionIndex];
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+        child: Container(
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 78, 13, 151),
+                Color.fromARGB(255, 107, 15, 168)
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                currentQuestion.question,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              ...currentQuestion.getShuffledAnswers().map((answer) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 64.0, vertical: 4.0),
+                  child: AnswerButton(
+                      onTap: () {
+                        chooseAnswer(answer);
+                      },
+                      answerText: answer),
+                );
+              }),
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
