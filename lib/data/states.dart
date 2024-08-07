@@ -1,0 +1,30 @@
+final class IndianState {
+  static const String ANDRA = 'Andra Pradesh';
+  static const String ARUNACHAL = 'Arunachal Pradesh';
+  static const String ASSAM = 'Assam';
+  static const String BIHAR = 'Bihar';
+  static const String CHATTISGARH = 'Chattisgarh';
+  static const String GOA = 'Goa';
+  static const String GUJARAT = 'Gujarat';
+  static const String HARYANA = 'Haryana';
+  static const String HIMACHAL = 'Himachal Pradesh';
+  static const String JHARKHAND = 'Jharkhand';
+  static const String KARNATAKA = 'Karnataka';
+  static const String KERELA = 'Kerela';
+  static const String MP = 'Madhya Pradesh';
+  static const String MAHARASHTRA = 'Maharashtra';
+  static const String MANIPUR = 'Manipur';
+  static const String MEGHALAYA = 'Meghalaya';
+  static const String MIZORAM = 'Mizoram';
+  static const String NAGALAND = 'Nagaland';
+  static const String ODISHA = 'Odhisha';
+  static const String PUNJAB = 'Punjab';
+  static const String RAJASTHAN = 'Rajasthan';
+  static const String SIKKIM = 'Sikkim';
+  static const String TAMILNADU = 'Tamil Nadu';
+  static const String TELENGANA = 'Telengana';
+  static const String TRIPURA = 'Tripura';
+  static const String UK = 'Uttarakhand';
+  static const String UP = 'Uttar Pradesh';
+  static const String WB = 'West Bengal';
+}

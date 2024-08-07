@@ -1,0 +1,31 @@
+final class IndianCapital {
+  static const String ANDRA = 'Amaravati';
+  static const String ARUNACHAL = 'Itanagar';
+  static const String ASSAM = 'Dispur';
+  static const String BIHAR = 'Patna';
+  static const String CHATTISGARH = 'Raipur';
+  static const String GOA = 'Panaji';
+  static const String GUJARAT = 'Ahemdabad';
+  static const String HARYANA = 'Chandigarh';
+  static const String HIMACHAL = 'Shimla';
+  static const String JHARKHAND = 'Ranchi';
+  static const String KARNATAKA = 'Bangalore';
+  static const String KERELA = 'Thiruvananthapuram';
+  static const String MP = 'Indore';
+  static const String MAHARASHTRA = 'Mumbai';
+  static const String MANIPUR = 'Imphal';
+  static const String MEGHALAYA = 'Shillong';
+  static const String MIZORAM = 'Aizwal';
+  static const String NAGALAND = 'Kohima';
+  static const String ODISHA = 'Bhubhneshwar';
+  static const String PUNJAB = 'Chandigarh';
+  static const String RAJASTHAN = 'Jaipur';
+  static const String SIKKIM = 'Gangtok';
+  static const String TAMILNADU = 'Chennai';
+  static const String TELENGANA = 'Hyderabad';
+  static const String TRIPURA = 'Agartala';
+  static const String UK = 'Dehradun';
+  static const String UP = 'Lucknow';
+  static const String WB = 'Kolkata';
+  static const String DELHI = 'New Delhi';
+}
