@@ -1,10 +1,11 @@
 import 'package:capitals/data/questions.dart';
+import 'package:capitals/utils/audio_helper.dart';
 import 'package:capitals/widgets/questions_view.dart';
 import 'package:capitals/widgets/result_view.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
+  const HomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -13,43 +14,49 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<String> answers = [];
-  var currentQuestionIndex = 0;
-  String activeScreen = 'home-page';
+  var currentQuestionIndex = 0; // Start from 0 to access the first element
 
-  @override
-  void initState() {
-    activeScreen = 'home-page';
-    super.initState();
+  Future<void> chooseAnswer(String answer, BuildContext context) async {
+    if (currentQuestionIndex < questionnaire.length) {
+      if (answer == questionnaire[currentQuestionIndex].answers[0]) {
+        await AudioHelper
+            .playCorrectAudio(); // Await the correct audio to finish
+      } else {
+        await AudioHelper.playOopsAudio(); // Await the oops audio to finish
+      }
+
+      setState(() {
+        answers.add(answer);
+        currentQuestionIndex += 1;
+      });
+
+      // Check if it's the last question
+      if (currentQuestionIndex >= questionnaire.length) {
+        Future.delayed(const Duration(seconds: 1), () {
+          setState(() {
+            resetStateBeforePush();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ResultView(score: "score"),
+              ),
+            );
+          });
+        });
+      }
+    }
   }
 
-  void chooseAnswer(String answer, BuildContext context) {
-    // if it is a valid range update and set the state
-    if (currentQuestionIndex < questionnaire.length - 1) {
-      setState(() {
-        currentQuestionIndex++;
-      });
-    } else {
-      setState(() {
-        activeScreen = 'final-screen';
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                ResultView(currentScreen: activeScreen, score: "score"),
-          ),
-        );
-      });
-    }
-
-    // add answers only if it is not present
-    if (!answers.contains(answer)) {
-      answers.add(answer);
-    }
+  void resetStateBeforePush() {
+    currentQuestionIndex = 0;
   }
 
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = questionnaire[currentQuestionIndex];
+    var currentQuestion = questionnaire[
+        currentQuestionIndex == questionnaire.length
+            ? questionnaire.length - 1
+            : currentQuestionIndex];
 
     return Scaffold(
       body: Center(
@@ -66,7 +73,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           child: QuestionsView(
-              questionObj: currentQuestion, onAnswerButtonTap: chooseAnswer),
+            questionObj: currentQuestion,
+            onAnswerButtonTap: chooseAnswer,
+          ),
         ),
       ),
     );

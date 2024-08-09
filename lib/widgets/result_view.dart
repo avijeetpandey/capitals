@@ -3,8 +3,7 @@
 import 'package:flutter/material.dart';
 
 class ResultView extends StatefulWidget {
-  ResultView({super.key, required this.currentScreen, required this.score});
-  String currentScreen;
+  ResultView({super.key, required this.score});
   final String score;
 
   @override
@@ -12,11 +11,7 @@ class ResultView extends StatefulWidget {
 }
 
 class _ResultViewState extends State<ResultView> {
-  void moveBackToParentScreen() {
-    setState(() {
-      widget.currentScreen = 'home-page';
-    });
-  }
+  void moveBackToParentScreen() {}
 
   @override
   Widget build(BuildContext context) {
