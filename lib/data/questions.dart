@@ -93,6 +93,42 @@ final List<QuizQuestion> questionnaire = [
       IndianCapital.TELENGANA
     ],
   ),
+  QuizQuestion(
+    question: "What is the capital of ${IndianState.JHARKHAND}?",
+    answers: [
+      IndianCapital.JHARKHAND,
+      IndianCapital.GOA,
+      IndianCapital.UK,
+      IndianCapital.UP
+    ],
+  ),
+  QuizQuestion(
+    question: "What is the capital of ${IndianState.KARNATAKA}?",
+    answers: [
+      IndianCapital.KARNATAKA,
+      IndianCapital.KERELA,
+      IndianCapital.TELENGANA,
+      IndianCapital.TAMILNADU
+    ],
+  ),
+  QuizQuestion(
+    question: "What is the capital of ${IndianState.KERELA}?",
+    answers: [
+      IndianCapital.KERELA,
+      IndianCapital.BIHAR,
+      IndianCapital.TAMILNADU,
+      IndianCapital.TELENGANA
+    ],
+  ),
+  QuizQuestion(
+    question: "What is the capital of ${IndianState.MAHARASHTRA}?",
+    answers: [
+      IndianCapital.MAHARASHTRA,
+      IndianCapital.DELHI,
+      IndianCapital.CHATTISGARH,
+      IndianCapital.PUNJAB
+    ],
+  ),
 ];
 
 final dummyQuestionare = QuizQuestion(
